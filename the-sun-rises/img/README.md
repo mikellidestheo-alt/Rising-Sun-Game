@@ -9,12 +9,13 @@ Drop files here with exactly these names. Anything missing is shown as an inked 
 ## Supplied
 matsukata.jpg, togo.jpg, witte.jpg, shogunate_elder.jpg, player_adviser.jpg, saionji.jpg, yamagata.jpg,
 makino.jpg, li_hongzhang.jpg, katsura.jpg, mutsu.jpg, perry.jpg,
+iwakura.jpg, saigo.jpg, okubo.jpg, wilson.jpg, roosevelt.jpg,
 bg_black_ships.jpg, bg_constitution_1889.jpg, bg_tsushima.jpg, bg_tsingtao.jpg, bg_versailles.jpg
 
 ## Still missing
-Core: emperor_meiji.jpg, iwakura.jpg, okubo.jpg, saigo.jpg, ito.jpg, komura.jpg, kato_takaaki.jpg
+Core: emperor_meiji.jpg, ito.jpg, komura.jpg, kato_takaaki.jpg
 
-Rivals and foreign figures: wilhelm_ii.jpg, lansdowne.jpg, nicholas_ii.jpg, roosevelt.jpg, gojong.jpg, yuan_shikai.jpg, wilson.jpg
+Rivals and foreign figures: wilhelm_ii.jpg, lansdowne.jpg, nicholas_ii.jpg, gojong.jpg, yuan_shikai.jpg
 
 Optional: okuma.jpg
 
