@@ -1989,8 +1989,29 @@ window.MAPDATA = {"w":2000,"h":1000,"k":337.4600700220457,"tx":1000,"ty":510,"co
     return {
       v: 1, ids: SC.map(s => s.id), i: 0, phase: 'act', strikes: 0,
       standing: 5, shackles: 0,
-      answers: [], order: null, chosen: null, fxApplied: []
+      answers: [], order: null, chosen: null, fxApplied: [],
+      slots: answerSlots(SC.length)
     };
+  }
+
+  // Where the historical answer sits (0 = A, 1 = B, 2 = C) for each decision.
+  // Balanced so each letter is correct equally often, and never the same letter three times running.
+  function answerSlots(n) {
+    for (let tries = 0; tries < 200; tries++) {
+      const a = shuffle(Array.from({ length: n }, (_, k) => k % 3));
+      if (a.every((v, k) => k < 2 || !(v === a[k - 1] && v === a[k - 2]))) return a;
+    }
+    return Array.from({ length: n }, (_, k) => k % 3);
+  }
+
+  // shuffle the options, then move the historical one into this decision's slot
+  function orderFor(s) {
+    const order = shuffle(s.opts.map((o, idx) => idx));
+    const h = order.findIndex(idx => s.opts[idx].H);
+    if (!st.slots) st.slots = answerSlots(st.ids.length);   // games saved before this change
+    const slot = Math.min(st.slots[st.i] == null ? h : st.slots[st.i], order.length - 1);
+    if (h >= 0 && h !== slot) { const t = order[slot]; order[slot] = order[h]; order[h] = t; }
+    return order;
   }
   const cur = () => st && SC.find(s => s.id === st.ids[st.i]);
   const save = () => { if (st) store.set(SAVE_KEY, st); };
@@ -2143,7 +2164,7 @@ window.MAPDATA = {"w":2000,"h":1000,"k":337.4600700220457,"tx":1000,"ty":510,"co
     clearInterval(typeTimer);
     if (st.phase === 'act') return renderAct(s);
     if (!st.order) {
-      st.order = shuffle(s.opts.map((o, idx) => idx));
+      st.order = orderFor(s);
       st.chosen = null;
       save();
     }
